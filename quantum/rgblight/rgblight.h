@@ -73,6 +73,7 @@
 |       40        | RGBLIGHT_MODE_TWINKLE + 3         |
 |       41        | RGBLIGHT_MODE_TWINKLE + 4         |
 |       42        | RGBLIGHT_MODE_TWINKLE + 5         |
+|       43        | RGBLIGHT_MODE_FIREFLY             |
 |-----------------|-----------------------------------|
  *****/
 

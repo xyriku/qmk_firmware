@@ -539,13 +539,24 @@ void rgblight_sethsv_eeprom_helper(uint8_t hue, uint8_t sat, uint8_t val, bool w
                 hue = rgblight_config.hue;
             }
 #endif
+#ifdef RGBLIGHT_EFFECT_FIREFLY
+            else if (rgblight_status.base_mode == RGBLIGHT_MODE_FIREFLY) {
+                rgblight_setrgb_range(0, 50, 115, 1, 4);
+                rgblight_setrgb_range(0, 50, 115, 3, 5);
+                rgblight_setrgb_at(94, 236, 247, 0);
+                rgblight_setrgb_at(199, 33, 138, 5);
+                rgblight_setrgb_at(199, 33, 138, 8);
+                rgblight_sethsv_at(21, 230, 230, 6);
+                rgblight_sethsv_at(21, 230, 230, 7);
+            }
+#endif
 #ifdef RGBLIGHT_EFFECT_STATIC_GRADIENT
             else if (rgblight_status.base_mode == RGBLIGHT_MODE_STATIC_GRADIENT) {
                 // static gradient
                 uint8_t delta     = rgblight_config.mode - rgblight_status.base_mode;
-                bool    direction = (delta % 2) == 0;
+                bool    direction = (delta % 1) == 0;
 
-                uint8_t range = pgm_read_byte(&RGBLED_GRADIENT_RANGES[delta / 2]);
+                uint8_t range = pgm_read_byte(&RGBLED_GRADIENT_RANGES[delta / 1]);
                 for (uint8_t i = 0; i < rgblight_ranges.effect_num_leds; i++) {
                     uint8_t _hue = ((uint16_t)i * (uint16_t)range) / rgblight_ranges.effect_num_leds;
                     if (direction) {
