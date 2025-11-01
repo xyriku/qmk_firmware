@@ -23,3 +23,5 @@
 
 #define USB_POLLING_INTERVAL_MS 5
 #define DEBOUNCE 10
+
+#define PERMISSIVE_HOLD

@@ -1,13 +1,13 @@
-#include QMK_KEYBOARD_H
+
 #include "common.h"
 extern rgblight_config_t rgblight_config;
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT_planck_grid(
-            KC_TAB,        KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,        KC_I,    KC_O,    KC_P,       KC_BSPC,
-            CTL_T(KC_ESC), KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,        KC_K,    KC_L,    LT(_NAV, KC_SCLN),KC_QUOT,
-            KC_LSFT,       KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,        KC_COMM, KC_DOT,  KC_SLSH,    KC_RSFT,
-            _______,       KC_LGUI, KC_LALT, FKEYS,   SYMBOL,  KC_SPC,  KC_MEH,  KC_ENT,      KC_LGUI, _______, _______,     KC_LNG5),
+            KC_TAB,        KC_Q,    KC_W,    KC_E,    KC_R,                  KC_T,                  KC_Y,       KC_U,        KC_I,      KC_O,    KC_P,               KC_BSPC,
+            CTRL_ESC,      KC_A,    KC_S,    KC_D,    KC_F,                  KC_G,                  KC_H,       KC_J,        KC_K,      KC_L,    NAV_SCLN,           KC_QUOT,
+            KC_LSFT,       KC_Z,    KC_X,    KC_C,    KC_V,                  KC_B,                  KC_N,       KC_M,        KC_COMM,   KC_DOT,  KC_UP,              KC_SLSH,
+            KC_LNG5,       _______,  KC_LALT, KC_LGUI, LT(_SYMBOL, KC_SPC),  FKEYS,                 KC_DEL,     MEH_ENT,     KC_LGUI,   KC_LEFT, KC_DOWN,            KC_RIGHT),
 
     // Every symbol and number required for coding and every-day use.
     [_SYMBOL] = LAYOUT_planck_grid(
@@ -16,9 +16,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             KC_PIPE, KC_EXLM, KC_AT,   KC_PLUS, KC_DLR,  KC_COLN, KC_UNDS, KC_AMPR, KC_LT,   KC_GT,   KC_BSLS, KC_RBRC,
             _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______),
 
-    // Function keys, mouse emulation and less commonly used special keys.
+    // Function keys, mouse emulation and less commonly used special keys.S
     [_FKEYS] = LAYOUT_planck_grid(
-            _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   _______, _______, _______, _______, _______, _______, KC_DEL,
+            _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   _______, _______, _______, _______, _______, _______, KC_DEL,S
             KC_LCTL, KC_F5,   KC_F6,   KC_F7,   KC_F8,   _______, _______, CAP_IMG, CAP_OCR, CAP_NMOV, CAP_MOV, CAP_FMOV,
             KC_PSCR, KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, _______, _______, _______, _______, _______,  _______,
             _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______),
@@ -49,7 +49,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             _______, _______, _______, _______, _______, _______, EMOJI,   _______, _______, _______, _______, _______),
 };
 void something_man(void) {
-    rgblight_enable_noeeprom(); // enables Rgb, without saving settings                       
+    rgblight_enable_noeeprom(); // enables Rgb, without saving settings
     rgblight_sethsv_noeeprom(180, 255, 255); // sets the color to teal/cyan without saving
 }
 // track the time of the last key input.
@@ -799,21 +799,7 @@ bool process_macros(uint16_t keycode, keyrecord_t *record) {
             set_game_mode(IS_GAME, false);
             return false;
 
-        case KC_BSPC:
-            // ctrl-backspace maps to opt-backspace
-            if (get_mods() == MOD_BIT(KC_LCTL))
-            {
-                uint8_t mod_state = get_mods();
-                clear_mods();
-
-                register_code(KC_LALT);
-                tap_code16(KC_BSPC);
-                unregister_code(KC_LALT);
-
-                set_mods(mod_state);
-                return false;
-            }
-            break;
+    
     }
 
     return true;

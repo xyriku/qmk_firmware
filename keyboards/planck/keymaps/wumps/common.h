@@ -31,6 +31,7 @@ enum planck_keycodes {
 
 #define FKEYS MO(_FKEYS)
 
+
 #define WORD_L LCTL(KC_LEFT)
 #define WORD_R LCTL(KC_RIGHT)
 
@@ -60,3 +61,4 @@ enum planck_keycodes {
 
 #define XBX_IMG LGUI(LALT(KC_PSCR))     // Capture portion of screen
 #define XBX_MOV LGUI(LALT(KC_G))        // Capture last 30 seconds
+
